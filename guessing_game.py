@@ -9,8 +9,7 @@ NOTE: If you strongly prefer to work locally on your own computer, you can total
 
 """
 
-import random
-
+import random, math
 
 def start_game():
     """Psuedo-code Hints
@@ -31,6 +30,37 @@ def start_game():
     """
     # write your code inside this function.
 
+    # Player attempts start at 0
+    attempts = 0
+
+    # Display Welcome message to the player
+    print("Welcome to the Number Guessing Game!")
+    # Store a random as the answer/solution.
+    random_number = random.uniform(0, 11) # Random float:  0.0 <= x <= 11.0
+    solution_number = math.ceil(random_number - 1) # Generate a solution number from 0 to 10
+    
+    while attempts < 6:
+        attempts += 1
+         # Prompt the player for a guess
+        guess_number = input("Guess a number from 0 to 10: ")
+        # Convert input value to an integer value
+        guess_number = int(guess_number)
+        
+        if guess_number > solution_number:
+            print("It's lower")
+        elif guess_number < solution_number:
+            print("It's higher")
+        else:
+            print("You Got it!")
+            print("It took you {} attempts to get the correct number.".format(attempts))
+            break
+    else:
+        print("Sorry, You've reached the maximum attempts.")
+        print("The correct number is: {}".format(solution_number))
+        
+    
+    # Let the player know the game is ending
+    print("The game is ending!")
 
 
 # Kick off the program by calling the start_game function.
