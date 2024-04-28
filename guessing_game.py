@@ -32,6 +32,8 @@ def start_game():
 
     # Player attempts start at 0
     attempts = 0
+    # Store the player scores
+    scores = []
 
     # Display Welcome message to the player
     print("Welcome to the Number Guessing Game!")
@@ -60,6 +62,17 @@ def start_game():
         else:
             print("You Got it!")
             print("It took you {} attempts to get the correct number.".format(attempts))
+            play_again = input("Would you like to play again? (yes/no): ")
+            if play_again.lower() == "yes":
+                scores.append(attempts)
+                # Using the built-in min function to get the high score
+                high_score = min(scores)
+                # As a player, at the start of each game, I should be shown the current high score (least amount of guess attempts) so that I know what I am supposed to beat.
+                print("The current high score is: {}".format(high_score))
+                # Reset the attempts and solution number
+                attempts = 0
+                solution_number = math.ceil(random.uniform(0, 11) - 1)
+                continue
             break
     else:
         print("Sorry, You've reached the maximum attempts.")
@@ -68,7 +81,9 @@ def start_game():
     
     # Let the player know the game is ending
     print("The game is ending!")
-
+    print("Thank you for playing the Number Guessing Game!")
+    # reset the scores list
+    scores = []
 
 # Kick off the program by calling the start_game function.
 start_game()
