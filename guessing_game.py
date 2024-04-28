@@ -40,12 +40,19 @@ def start_game():
     solution_number = math.ceil(random_number - 1) # Generate a solution number from 0 to 10
     
     while attempts < 6:
-        attempts += 1
-         # Prompt the player for a guess
-        guess_number = input("Guess a number from 0 to 10: ")
-        # Convert input value to an integer value
-        guess_number = int(guess_number)
+        try:
+            # Prompt the player for a guess
+            guess_number = input("Guess a number from 0 to 10: ")
+            # Convert input value to an integer value
+            guess_number = int(guess_number)
+            if guess_number < 0 or guess_number > 10:
+                raise ValueError("The guess must be a number between 0 and 10")
+        except ValueError as err:
+            # Include the error text to the output
+            print("Oh no, we ran into an issue. {}. please try again.".format(err))
+            continue
         
+        attempts += 1
         if guess_number > solution_number:
             print("It's lower")
         elif guess_number < solution_number:
